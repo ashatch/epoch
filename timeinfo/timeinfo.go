@@ -1,28 +1,28 @@
-package main
+package timeinfo
 
 import "time"
 
 // TimeData contains epoch information
 type TimeData struct {
-	iso     string
-	zone    string
-	seconds int64
-	millis  int64
-	nanos   int64
+	Iso     string
+	Zone    string
+	Seconds int64
+	Millis  int64
+	Nanos   int64
 }
 
-// GetTime retrieves a TimeData
+// GetTime retrieves a TimeData based on current system time or with useUTC true for UTC
 func GetTime(useUTC bool) TimeData {
 
 	var now = timeForNow(useUTC)
 	zoneName, _ := now.Zone()
 
 	currentTime := TimeData{
-		zone:    zoneName,
-		iso:     now.Format(time.RFC3339),
-		seconds: now.Unix(),
-		millis:  now.UnixNano() / 1000000,
-		nanos:   now.UnixNano()}
+		Zone:    zoneName,
+		Iso:     now.Format(time.RFC3339),
+		Seconds: now.Unix(),
+		Millis:  now.UnixNano() / 1000000,
+		Nanos:   now.UnixNano()}
 
 	return currentTime
 }
